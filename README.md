@@ -3,7 +3,7 @@ CSE 455 final project, using fast R-CNN to train a instance seg and object detec
 
 
 ## Introduction
-This project is aiming for provide ground truth for [CRUW dataset](https://www.cruwdataset.org/introduction) built by Information Processing Lab @UWECE.This devkit  provide image base Mask RCNN groud truth result as benchmark in cruw format. The object detection base on [Detectron2](https://github.com/facebookresearch/detectron2) is the main part for this project. And use transformed [nuImages](https://www.nuscenes.org/nuimages) dataset to pretrain the benchmark model. This is a futher improvement for the last CSE599 G deep learning class final project. I added the cyclist detection part and improve instance segmantation accuracy by 24.13% and object detection average precision by 23.74%.
+This project is aiming for provide ground truth for [CRUW dataset](https://www.cruwdataset.org/introduction) built by Information Processing Lab @UWECE.This devkit  provide image base Mask RCNN groud truth result as benchmark in cruw format. The object detection base on [Detectron2](https://github.com/facebookresearch/detectron2) is the main part for this project. And use transformed [nuImages](https://www.nuscenes.org/nuimages) dataset to pretrain the benchmark model. This is a futher improvement for the last [CSE599 G deep learning class final project](https://github.com/TedSongjh/CSE599-fianl-project). I added the cyclist detection part and improve instance segmantation accuracy by 24.13% and object detection average precision by 23.74%.
 
 ## Installation
 
