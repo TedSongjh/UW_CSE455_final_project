@@ -5,6 +5,24 @@ CSE 455 final project, using fast R-CNN to train a instance seg and object detec
 ## Introduction
 This project is aiming for provide ground truth for [CRUW dataset](https://www.cruwdataset.org/introduction) built by Information Processing Lab @UWECE.This devkit  provide image base Mask RCNN groud truth result as benchmark in cruw format. The object detection base on [Detectron2](https://github.com/facebookresearch/detectron2) is the main part for this project. And use transformed [nuImages](https://www.nuscenes.org/nuimages) dataset to pretrain the benchmark model. This is a futher improvement for the last [CSE599 G deep learning class final project](https://github.com/TedSongjh/CSE599-fianl-project). I added the cyclist detection part and improve instance segmantation accuracy by 24.13% and object detection average precision by 23.74%.
 
+## Related Work
+
+[Detectron2](https://github.com/facebookresearch/detectron2) 
+
+Detectron 2 is Facebook AI Research's next generation software system that implements state-of-the-art object detection algorithms. It is a ground-up rewrite of the previous version, Detectron, and it originates from maskrcnn-benchmark. This object detection algorithms is powered by the PyTorch deep learning framework,and also includes more features such as panoptic segmentation, Densepose, Cascade R-CNN, rotated bounding boxes, PointRend, DeepLab, etc. I use mask R-CNN part of this project, and modify the source code to custom dataset.
+
+[nuImages](https://www.nuscenes.org/nuimages) and [nuScenes devkit](https://github.com/nutonomy/nuscenes-devkit) 
+
+Instead of using KITTI, nuImages is the latest dataset for autonomous driving. This dataset is extracted and re-organize from the orginal nuScense dataset. The annotating the 1.4 million images in nuScenes with 2d annotations would have led to highly redundant annotations, which are not ideal for training an object detector. So the nuImages dataset set out to label a more varied large-scale image dataset from nearly 500 logs (compared to 83 in nuScenes) of driving data. 
+The seniero and quaility are similar to the CRUW we collected. And also, the metadata and annotation is extract from [nuScenes](https://www.nuscenes.org/nuscenes) dataset, which have more information in the relational database.
+
+This devkit is used in this project to load nuImage dataset. And also, when we desgined our dataset format, we took some schema built idea from this dataset.
+
+
+[CRUW dataset](https://www.cruwdataset.org/introduction)
+
+CRUW is a camera-radar dataset for autonomous vehicle applications collected eariler this year by IPL@UWECE, we collect these data from E18 parking lot, road in side UW, city scenes and I-5 highway. It is a good resource for researchers to study FMCW radar data, that has high potential in the future autonomous driving. We will publish this dataset soon.Our dataset contains a pair of stereo cameras and 2 77GHz FMCW radar antenna array, both the camera and radar are calibrated and sychronized. During the last summer, I made the preprocess of this dataset, time-syschronize the camera and radar,and transfer the FMCW radar data to Range-Angle-Doppler(RAD) format
+
 ## Installation
 
 To install Dectron2:
@@ -122,6 +140,37 @@ run [nuimages_inference.py](https://github.com/TedSongjh/cruw_detectron2_devkit/
 **3. Inference on nuImages dataset and compare to ground truth**
 
 run [visual&inference.py](https://github.com/TedSongjh/cruw_detectron2_devkit/blob/main/visual%26inference.py) to save both the groud truth and inference result
+
+## Visual Results
+
+Inference on NuImage val dataset:
+![nuimage_val_1](https://github.com/TedSongjh/UW_CSE455_final_project/blob/main/image/n006-2018-09-17-11-57-46-0400__CAM_BACK__1537200799887532.png)
+
+![nuimage_val_2](https://github.com/TedSongjh/UW_CSE455_final_project/blob/main/image/n008-2018-05-14-14-13-44-0400__CAM_BACK_LEFT__1526321708897295.png)
+
+![nuimage_val_3](https://github.com/TedSongjh/UW_CSE455_final_project/blob/main/image/n008-2018-05-14-14-13-44-0400__CAM_FRONT_LEFT__1526322077504917.png)
+
+![nuimage_val_4](https://github.com/TedSongjh/UW_CSE455_final_project/blob/main/image/n008-2018-05-14-14-13-44-0400__CAM_FRONT__1526321757862465.png)
+
+![nuimage_val_5](https://github.com/TedSongjh/UW_CSE455_final_project/blob/main/image/n010-2018-07-03-14-40-41%2B0800__CAM_BACK_LEFT__1530600537147633.png)
+
+![nuimage_val_6](https://github.com/TedSongjh/UW_CSE455_final_project/blob/main/image/n010-2018-07-05-15-31-09%2B0800__CAM_BACK__1530776395387257.png)
+
+Inference on CRUW dataset:
+
+![curw_val_1](https://github.com/TedSongjh/UW_CSE455_final_project/blob/main/image/0000000000.jpg)
+
+
+![curw_val_2](https://github.com/TedSongjh/UW_CSE455_final_project/blob/main/image/0000000049.jpg)
+
+
+![curw_val_3](https://github.com/TedSongjh/UW_CSE455_final_project/blob/main/image/0000000385.jpg)
+
+![curw_val_4](https://github.com/TedSongjh/UW_CSE455_final_project/blob/main/image/0000000419.jpg)
+
+![curw_val_5](https://github.com/TedSongjh/UW_CSE455_final_project/blob/main/image/0000000644.jpg)
+
+![curw_val_6](https://github.com/TedSongjh/UW_CSE455_final_project/blob/main/image/0000001022.jpg)
 
 ## Quantitative Results
 
