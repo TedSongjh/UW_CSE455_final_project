@@ -148,8 +148,6 @@ Inference on NuImage val dataset:
 
 ![nuimage_val_2](https://github.com/TedSongjh/UW_CSE455_final_project/blob/main/image/n008-2018-05-14-14-13-44-0400__CAM_BACK_LEFT__1526321708897295.png)
 
-![nuimage_val_3](https://github.com/TedSongjh/UW_CSE455_final_project/blob/main/image/n008-2018-05-14-14-13-44-0400__CAM_FRONT_LEFT__1526322077504917.png)
-
 ![nuimage_val_4](https://github.com/TedSongjh/UW_CSE455_final_project/blob/main/image/n008-2018-05-14-14-13-44-0400__CAM_FRONT__1526321757862465.png)
 
 ![nuimage_val_5](https://github.com/TedSongjh/UW_CSE455_final_project/blob/main/image/n010-2018-07-03-14-40-41%2B0800__CAM_BACK_LEFT__1530600537147633.png)
@@ -171,6 +169,7 @@ Inference on CRUW dataset:
 ![curw_val_5](https://github.com/TedSongjh/UW_CSE455_final_project/blob/main/image/0000000644.jpg)
 
 ![curw_val_6](https://github.com/TedSongjh/UW_CSE455_final_project/blob/main/image/0000001022.jpg)
+From above image, we can see that 
 
 ## Quantitative Results
 
