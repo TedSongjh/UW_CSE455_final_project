@@ -44,6 +44,8 @@ Put [nuimages_inference.py](https://github.com/TedSongjh/cruw_detectron2_devkit/
 ## nuImages Data loader
 **1. Convert nuImages dataset to CRUW dataset format**
 
+The nuImages dataset have more attributes than our dataset, and also the nuImages's categories is in detail, which is meaning less for our Camera-Radar Fusion (CRF) annotation(The information extracted from radar can only provide accuracy location and velocity information, the feature of objects are compressed).This part of the code can be access from [nuimages_loader.py](https://github.com/TedSongjh/cruw_detectron2_devkit/blob/main/nuimages_loader.py).
+
 Use the nuScence build in devkit to load nuImages dataset and convert the categories use a mapping function, read all the relational data and transfer the metadata as a dict. For the segmantation part, the orignal segmantation format is a single map with category IDs for each instance, convert the segmantation to each map per object, which can help with futher fusion in objects.And also, in nuImages, the cyclist are not seperated into different kind of pedestrain, but we want to merge the cyclist and the vehicle.cycle, so read the attribution annotation and the bicycle with rider will be train as different category.
 
 The categories mapping from nuImages to CRUW is:
