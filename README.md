@@ -106,7 +106,50 @@ version = 'v1.0-train'
 To train the dataset on Detectron2 useing ResNet FPN backbone. 
 
 ```
-./detectron2/tools/train_net.py   --config-file ../configs/NuImages-RCNN-FPN.yaml   --num-gpus 1 SOLVER.IMS_PER_BATCH 2 SOLVER.BASE_LR 0.0025
+MODEL:
+  META_ARCHITECTURE: "GeneralizedRCNN"
+  BACKBONE:
+    NAME: "build_resnet_fpn_backbone"
+  RESNETS:
+    OUT_FEATURES: ["res2", "res3", "res4", "res5"]
+  FPN:
+    IN_FEATURES: ["res2", "res3", "res4", "res5"]
+  ANCHOR_GENERATOR:
+    SIZES: [[32], [64], [128], [256], [512]]  # One size for each in feature map
+    ASPECT_RATIOS: [[0.5, 1.0, 2.0]]  # Three aspect ratios (same for all in feature maps)
+  RPN:
+    IN_FEATURES: ["p2", "p3", "p4", "p5", "p6"]
+    PRE_NMS_TOPK_TRAIN: 2000  # Per FPN level
+    PRE_NMS_TOPK_TEST: 1000  # Per FPN level
+    POST_NMS_TOPK_TRAIN: 1000
+    POST_NMS_TOPK_TEST: 1000
+  ROI_HEADS:
+    NAME: "StandardROIHeads"
+    IN_FEATURES: ["p2", "p3", "p4", "p5"]
+  ROI_BOX_HEAD:
+    NAME: "FastRCNNConvFCHead"
+    NUM_FC: 2
+    POOLER_RESOLUTION: 7
+  ROI_MASK_HEAD:
+    NAME: "MaskRCNNConvUpsampleHead"
+    NUM_CONV: 4
+    POOLER_RESOLUTION: 14
+  WEIGHTS: "detectron2://ImageNetPretrained/MSRA/R-50.pkl"
+  MASK_ON: True
+  RESNETS:
+    DEPTH: 50
+DATASETS:
+  TRAIN: ("nuimages_train",)
+  TEST: ("nuimages_test",)
+SOLVER:
+  IMS_PER_BATCH: 16
+  BASE_LR: 0.02
+  STEPS: (210000, 250000)
+  MAX_ITER: 270000
+INPUT:
+  MIN_SIZE_TRAIN: (640, 672, 704, 736, 768, 800)
+  MASK_FORMAT: "bitmask"
+VERSION: 2
 ```
 
 The detail of this archetecuture can be found in [NuImages-RCNN-FPN.yaml](https://github.com/TedSongjh/cruw_detectron2_devkit/blob/main/NuImages-RCNN-FPN.yaml)
@@ -129,7 +172,7 @@ Then run eval-only command and set model weights to the last checkpoint (in this
 ```
 
 ## Inference tools
-There are three inference tools to visulize result
+I made three inference tools to visulize result
 
 **1. Visulize nuImages groud truth**
 
@@ -145,7 +188,7 @@ run [visual&inference.py](https://github.com/TedSongjh/cruw_detectron2_devkit/bl
 
 ## Visual Results
 
-Inference on NuImage val dataset:
+Inference on NuImage val dataset(ground truth is in above, and inference result is down below):
 ![nuimage_val_1](https://github.com/TedSongjh/UW_CSE455_final_project/blob/main/image/n006-2018-09-17-11-57-46-0400__CAM_BACK__1537200799887532.png)
 
 ![nuimage_val_2](https://github.com/TedSongjh/UW_CSE455_final_project/blob/main/image/n008-2018-05-14-14-13-44-0400__CAM_BACK_LEFT__1526321708897295.png)
